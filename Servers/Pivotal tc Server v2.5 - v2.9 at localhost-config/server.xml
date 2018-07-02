@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Server port="${base.shutdown.port}" shutdown="SHUTDOWN">
+	
+	<!-- LISTENERS -->
+	<Listener className="org.apache.catalina.core.JasperListener"/>
+  	<Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
+	<Listener className="mshare.util.servlet.MshareServletStopListener"/>
+  	<Listener className="com.springsource.tcserver.serviceability.deploy.TcContainerDeployer"/>
+    <Listener accessFile="${catalina.base}/conf/jmxremote.access" authenticate="false" bind="${rmi.bind.address}" className="com.springsource.tcserver.serviceability.rmi.JmxSocketListener" passwordFile="${catalina.base}/conf/jmxremote.password" port="${base.jmx.port}" useSSL="false"/>
+    <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener"/>
+  	
+  	
+  	<!-- Comment these entries out to disable JMX MBeans support used for the  administration web application -->
+  	<Listener className="org.apache.catalina.core.AprLifecycleListener"/>
+ 	<Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+  
+    <GlobalNamingResources>
+  
+		<!-- Editable user database that can also be used by
+			 UserDatabaseRealm to authenticate users -->
+		<Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
+		
+	</GlobalNamingResources>
+  
+  
+  <Service name="Catalina">
+
+	<!-- Define a non-SSL HTTP/1.1 Connector on port 8080 -->
+	<!-- Note : To disable connection timeouts, set connectionTimeout value to 0 -->
+	<Connector acceptCount="100" connectionTimeout="${tomcat.http.connectionTimeout}" disableUploadTimeout="true" enableLookups="false" maxHttpHeaderSize="8192" maxSpareThreads="${tomcat.http.maxSpareThreads}" maxThreads="${tomcat.http.maxThreads}" minSpareThreads="${tomcat.http.minSpareThreads}" port="${bio.tomcat.port}"/>
+	<!-- Define a non-SSL HTTP/1.1 Connector on port 80  (Can be used dev if needed) -->
+	<!-- <Connector port="80" maxHttpHeaderSize="8192"
+			   maxThreads="50" minSpareThreads="2" maxSpareThreads="2"
+			   enableLookups="false" redirectPort="443" acceptCount="100"
+			   connectionTimeout="600000" disableUploadTimeout="true"
+			    @tomcat.connector.customProperties@
+		/>
+	-->
+	
+	<!--How to enable an SSL connector on port 443-->
+	<!--
+		1. Ensure the JAVA_HOME environment variable is defined and pointing to a JDK.
+		2. Execute: Unix		$JAVA_HOME/bin/keytool -genkey -alias tomcat -keyalg RSA 
+					Windows: 	"%JAVA_HOME%"\bin\keytool -genkey -alias tomcat -keyalg RSA 
+		3. Input values for each prompt and use the enter the same password for both prompts (Default password is "changeit")
+		4. Uncomment the connector below
+	-->
+	
+	<!-- Define a SSL HTTP/1.1 Connector on port 443 -->
+	<!--  <Connector port="443" maxHttpHeaderSize="8192"
+               maxThreads="150" minSpareThreads="25" maxSpareThreads="75"
+               enableLookups="false" disableUploadTimeout="true"
+               acceptCount="100" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS" keystorePass="changeit"
+               keystoreFile="${user.home}/.keystore" SSLEnabled="true"
+			   @tomcat.connector.customProperties@
+			/>
+	-->
+	
+	
+	
+	
+	<Engine defaultHost="localhost" name="Catalina">
+
+	  <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+
+	  <Host appBase="webapps" autoDeploy="false" name="localhost" unpackWARs="true" xmlNamespaceAware="false" xmlValidation="false">
+
+	
+
+		
+		<Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster">
+        		
+					<Manager className="org.apache.catalina.ha.session.DeltaManager" expireSessionsOnShutdown="false" notifyListenersOnReplication="true"/>
+					
+					<Channel className="org.apache.catalina.tribes.group.GroupChannel">
+           		 		<Membership address="${tomcat.cluster.ip}" className="org.apache.catalina.tribes.membership.McastService" dropTime="3000" frequency="500" port="${http.replication.port}"/>
+            			<Receiver address="auto" autoBind="100" className="org.apache.catalina.tribes.transport.nio.NioReceiver" maxThreads="6" port="4001" selectorTimeout="5000"/>
+            			<Sender className="org.apache.catalina.tribes.transport.ReplicationTransmitter">
+              				<Transport className="org.apache.catalina.tribes.transport.nio.PooledParallelSender"/>
+            			</Sender>
+            			<Interceptor className="org.apache.catalina.tribes.group.interceptors.TcpFailureDetector"/>
+            			<Interceptor className="org.apache.catalina.tribes.group.interceptors.MessageDispatch15Interceptor"/>
+          			</Channel>
+          			
+					<Valve className="org.apache.catalina.ha.tcp.ReplicationValve" filter=".*\.gif;.*\.js;.*\.jpg;.*\.htm;.*\.html;.*\.txt;"/>
+					<Valve className="org.apache.catalina.ha.session.JvmRouteBinderValve" enabled="true"/> 
+					  
+					<ClusterListener className="org.apache.catalina.ha.session.JvmRouteSessionIDBinderListener"/>
+					<ClusterListener className="org.apache.catalina.ha.session.ClusterSessionListener"/>
+					
+					<Deployer className="org.apache.catalina.ha.deploy.FarmWarDeployer" deployDir="/tmp/war-deploy/" tempDir="/tmp/war-temp/" watchDir="/tmp/war-listen/" watchEnabled="false"/>
+				</Cluster>
+		
+
+	  </Host>
+
+	</Engine>
+
+  </Service>
+  
+</Server>

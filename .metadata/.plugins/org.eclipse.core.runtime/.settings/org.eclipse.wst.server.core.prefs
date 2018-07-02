@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+runtimes=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<runtimes>\r\n  <runtime com.springsource.tcserver.version\="tomcat-7.0.23.A.RELEASE" id\="Pivotal tc Server v2.5 - v2.9" location\="C\:/dev/TCServer" name\="Pivotal tc Server v2.5 - v2.9" runtime-type-id\="com.vmware.server.tc.runtime.70" timestamp\="0"/>\r\n</runtimes>\r\n

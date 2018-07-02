@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.pivotal.server.tc.launchConfiguration">
+<listAttribute key="org.eclipse.jdt.launching.CLASSPATH">
+<listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry containerPath=&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_101&quot; path=&quot;2&quot; type=&quot;4&quot;/&gt;&#13;&#10;"/>
+<listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry externalArchive=&quot;C:/dev/TCServer/tomcat-7.0.23.A.RELEASE/bin/bootstrap.jar&quot; path=&quot;3&quot; type=&quot;2&quot;/&gt;&#13;&#10;"/>
+<listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry externalArchive=&quot;C:/dev/TCServer/tomcat-7.0.23.A.RELEASE/bin/tomcat-juli.jar&quot; path=&quot;3&quot; type=&quot;2&quot;/&gt;&#13;&#10;"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
+<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_101"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="start"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;C:\dev\workspaces\clean\.metadata\.plugins\org.eclipse.wst.server.core\tmp0&quot; -Dcatalina.home=&quot;C:\dev\TCServer\tomcat-7.0.23.A.RELEASE&quot; -Dwtp.deploy=&quot;C:\dev\workspaces\clean&quot; -Djava.endorsed.dirs=&quot;C:\dev\TCServer\tomcat-7.0.23.A.RELEASE\endorsed&quot; -Xmx768m -Xss256k -XX:MaxPermSize=256m -Dinsight.enabled=false&#13;&#10;-Dorg.apache.tapestry.enable-reset-service=true&#13;&#10;-Dcom.sun.management.jmxremote&#13;&#10;-Djava.net.preferIPv4Stack=true&#13;&#10;-server&#13;&#10;-Xms256m -Xmx1280m -XX:PermSize=64m -XX:MaxPermSize=256m&#13;&#10;-Dcatalina.logs=/tmp/logs&#13;&#10;-Dlog4j.configuration=file:/C:/dev/workspaces&#13;&#10;-Dorg.apache.tapestry.disable-caching=true"/>
+<stringAttribute key="server-id" value="Pivotal tc Server v2.5 - v2.9 at localhost"/>
+</launchConfiguration>

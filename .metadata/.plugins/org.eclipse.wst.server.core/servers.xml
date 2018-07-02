@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<servers>
+  <server auto-publish-setting="2" auto-publish-time="1" com.springsource.tcserver.asf="false" com.springsource.tcserver.name="TC263" configuration-id="/Servers/Pivotal tc Server v2.5 - v2.9 at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Pivotal tc Server v2.5 - v2.9 at localhost" modulesReloadableByDefault="false" name="Pivotal tc Server v2.5 - v2.9 at localhost" runtime-id="Pivotal tc Server v2.5 - v2.9" saveSeparateContextFiles="true" serveModulesWithoutPublish="true" server-type="com.vmware.server.tc.70" server-type-id="com.vmware.server.tc.70" start-timeout="180" stop-timeout="60" testEnvironment="true" timestamp="1">
+    <list key="addExtraVmArgs" value0="-Dinsight.enabled=false"/>
+    <list key="removeExtraVmArgs"/>
+  </server>
+</servers>

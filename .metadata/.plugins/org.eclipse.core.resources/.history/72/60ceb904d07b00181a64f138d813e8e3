@@ -1,0 +1,16 @@
+package deckOfCards.quickstart;
+
+import io.restassured.response.Response;
+
+public class Base_RT {
+
+	private static final String deckOfCards_base_url = "https://deckofcardsapi.com/api/deck";
+
+	//The commented out code below can replaces the base url as another option for initializing the base url.
+	//TestUtils.getdeckOfCardsBaseURL();
+
+
+	public static String getdeckOfCardsBaseUrl() {
+		return deckOfCards_base_url;
+	}
+}
